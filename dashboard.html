@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SecureDocs - Dashboard</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/dashboard.css" />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <!-- Navigation Header -->
+    <nav class="dashboard-nav">
+      <div class="nav-content">
+        <div class="nav-brand">
+          <i class="fas fa-shield-alt"></i>
+          <span>SecureDocs</span>
+        </div>
+        <div class="nav-actions">
+          <button
+            class="nav-btn profile-btn"
+            onclick="window.location.href='profile.html'"
+          >
+            <i class="fas fa-user"></i>
+            <span>Profile</span>
+          </button>
+          <button class="nav-btn logout-btn" onclick="logoutUser()">
+            <i class="fas fa-sign-out-alt"></i>
+            <span>Logout</span>
+          </button>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Main Dashboard Content -->
+    <main class="dashboard-main">
+      <div class="dashboard-container">
+        <!-- Welcome Section -->
+        <section class="welcome-section">
+          <div class="welcome-content">
+            <h1 class="welcome-title">
+              <i class="fas fa-tachometer-alt"></i>
+              Dashboard
+            </h1>
+            <p class="welcome-subtitle">
+              Manage your secure documents with ease
+            </p>
+          </div>
+          <div class="stats-grid">
+            <div class="stat-card">
+              <div class="stat-icon">
+                <i class="fas fa-file-alt"></i>
+              </div>
+              <div class="stat-info">
+                <span class="stat-number" id="totalDocs">0</span>
+                <span class="stat-label">Documents</span>
+              </div>
+            </div>
+            <!-- <div class="stat-card">
+              <div class="stat-icon">
+                <i class="fas fa-cloud-upload-alt"></i>
+              </div>
+              <div class="stat-info">
+                <span class="stat-number" id="totalSize">0 MB</span>
+                <span class="stat-label">Storage Used</span>
+              </div>
+            </div> -->
+          </div>
+        </section>
+
+        <!-- Upload Section -->
+        <section class="upload-section">
+          <div class="upload-card">
+            <div class="upload-header">
+              <h2>
+                <i class="fas fa-cloud-upload-alt"></i>
+                Upload Document
+              </h2>
+              <p>Drag and drop your files here or click to browse</p>
+            </div>
+
+            <div class="upload-area" id="uploadArea">
+              <input
+                type="file"
+                id="docFile"
+                multiple
+                accept=".pdf,.doc,.docx,.txt,.jpg,.jpeg,.png"
+              />
+              <div class="upload-content" id="uploadContent">
+                <div class="upload-icon">
+                  <i class="fas fa-cloud-upload-alt"></i>
+                </div>
+                <div class="upload-text">
+                  <span class="upload-main-text"
+                    >Drop files here or click to upload</span
+                  >
+                  <span class="upload-sub-text"
+                    >Supports PDF, DOC, DOCX, TXT, JPG, PNG (Max 10MB
+                    each)</span
+                  >
+                </div>
+              </div>
+              <div
+                class="upload-progress"
+                id="uploadProgress"
+                style="display: none"
+              >
+                <div class="progress-bar">
+                  <div class="progress-fill" id="progressFill"></div>
+                </div>
+                <span class="progress-text" id="progressText">0%</span>
+              </div>
+            </div>
+
+            <div class="upload-actions">
+              <button class="btn btn-primary" onclick="triggerFileInput()">
+                <i class="fas fa-plus"></i>
+                Choose Files
+              </button>
+              <button
+                class="btn btn-success"
+                onclick="uploadDocument()"
+                id="uploadBtn"
+                disabled
+              >
+                <i class="fas fa-upload"></i>
+                Upload Selected
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <!-- Documents Section -->
+        <section class="documents-section">
+          <div class="documents-header">
+            <h2>
+              <i class="fas fa-folder-open"></i>
+              Your Documents
+            </h2>
+            <div class="documents-actions">
+              <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input
+                  type="text"
+                  placeholder="Search documents..."
+                  id="searchInput"
+                  onkeyup="filterDocuments()"
+                />
+              </div>
+              <div class="view-toggle">
+                <button
+                  class="view-btn active"
+                  data-view="grid"
+                  onclick="toggleView('grid')"
+                  title="Grid View"
+                >
+                  <i class="fas fa-th"></i>
+                </button>
+                <button
+                  class="view-btn"
+                  data-view="list"
+                  onclick="toggleView('list')"
+                  title="List View"
+                >
+                  <i class="fas fa-list"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="documents-container">
+            <div class="documents-grid" id="docList">
+              <!-- Documents will be populated here -->
+            </div>
+
+            <!-- Empty State -->
+            <div class="empty-state" id="emptyState">
+              <div class="empty-icon">
+                <i class="fas fa-folder-open"></i>
+              </div>
+              <h3>No documents yet</h3>
+              <p>Upload your first document to get started</p>
+              <button class="btn btn-primary" onclick="triggerFileInput()">
+                <i class="fas fa-plus"></i>
+                Upload Document
+              </button>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <!-- Modals Document Preview Modal -->
+    <div class="modal" id="previewModal">
+      <div class="modal-content modal-large">
+        <div class="modal-header">
+          <h3 id="previewTitle">Document Preview</h3>
+          <button class="modal-close" onclick="closeModal('previewModal')">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="preview-container" id="previewContainer">
+            Preview content will be loaded here
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button
+            class="btn btn-secondary"
+            onclick="closeModal('previewModal')"
+          >
+            Close
+          </button>
+          <button class="btn btn-primary" id="downloadFromPreview">
+            <i class="fas fa-download"></i>
+            Download
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Delete Confirmation Modal -->
+    <div class="modal" id="deleteModal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3>Confirm Delete</h3>
+          <button class="modal-close" onclick="closeModal('deleteModal')">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="delete-warning">
+            <i class="fas fa-exclamation-triangle"></i>
+            <p>
+              Are you sure you want to delete "<span id="deleteFileName"></span
+              >"?
+            </p>
+            <p class="warning-text">This action cannot be undone.</p>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" onclick="closeModal('deleteModal')">
+            Cancel
+          </button>
+          <button class="btn btn-danger" id="confirmDeleteBtn">
+            <i class="fas fa-trash"></i>
+            Delete
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Toast Notifications -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-storage-compat.js"></script>
+
+    <!-- Project Scripts -->
+    <script src="js/firebaseConfig.js"></script>
+    <script src="js/logger.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/dashboard.js"></script>
+  </body>
+</html>

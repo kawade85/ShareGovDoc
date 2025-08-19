@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SecureDocs - Profile</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/profile.css" />
+  </head>
+  <body>
+    <div class="navbar">
+      <h2>My Profile</h2>
+      <a href="dashboard.html">Dashboard</a>
+      <button onclick="logoutUser()">Logout</button>
+    </div>
+
+    <div class="container">
+      <h3>User Profile</h3>
+      <p><strong>Email:</strong> <span id="userEmail"></span></p>
+      <p><strong>Phone:</strong> <span id="userPhone"></span></p>
+      <h3>Linked Family Members</h3>
+      <ul id="familyList"></ul>
+      <input
+        type="text"
+        id="familyMember"
+        placeholder="Enter Family Member Email"
+      />
+      <button onclick="addFamilyMember()">Add Member</button>
+      <!-- <p id="profileMsg"></p> -->
+    </div>
+
+    <div class="toast-container" id="toastContainer"></div>
+
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+    <script src="js/firebaseConfig.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/logger.js"></script>
+    <script src="js/profile.js"></script>
+  </body>
+</html>

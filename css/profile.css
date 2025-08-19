@@ -1,0 +1,354 @@
+/* ===== PROFILE SPECIFIC STYLES ===== */
+
+/* Navigation bar */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(51, 65, 85, 0.3);
+  z-index: 1000;
+  transition: all 0.3s ease;
+}
+
+.navbar h2 {
+  font-size: 1.5rem;
+  margin: 0;
+  background: linear-gradient(135deg, #06b6d4, #10b981);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.navbar a {
+  color: #4693f0;
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  font-weight: 500;
+}
+
+.navbar a:hover {
+  background: rgba(236, 252, 255, 0.1);
+  color: #06b6d4;
+  transform: translateY(-1px);
+}
+
+.navbar button {
+  width: auto;
+  padding: 0.5rem 1rem;
+  margin: 0;
+  font-size: 0.9rem;
+  background: linear-gradient(135deg, #ef4444, #dc2626);
+}
+
+.navbar button:hover {
+  background: linear-gradient(135deg, #dc2626, #ef4444);
+  box-shadow: 0 5px 15px rgba(239, 68, 68, 0.3);
+}
+
+/* Container adjustment for navbar */
+.container {
+  max-width: 800px;
+  padding: 6rem 2rem 2rem;
+  justify-content: flex-start;
+  align-items: stretch;
+}
+
+/* Profile sections */
+.profile-section {
+  background: rgba(30, 41, 59, 0.4);
+  padding: 2rem;
+  border-radius: 20px;
+  margin-bottom: 2rem;
+  border: 1px solid rgba(51, 65, 85, 0.3);
+  backdrop-filter: blur(15px);
+  position: relative;
+  overflow: hidden;
+}
+
+.profile-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #06b6d4, transparent);
+}
+
+.profile-section h3 {
+  text-align: left;
+  margin-bottom: 1.5rem;
+  color: #f1f5f9;
+  position: relative;
+  padding-left: 1rem;
+}
+
+.profile-section h3::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 4px;
+  height: 20px;
+  background: linear-gradient(180deg, #06b6d4, #10b981);
+  border-radius: 2px;
+}
+
+/* User info styling */
+.user-info {
+  display: grid;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.info-item {
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  background: rgba(51, 65, 85, 0.3);
+  border-radius: 12px;
+  border-left: 4px solid #06b6d4;
+  transition: all 0.3s ease;
+}
+
+.info-item:hover {
+  background: rgba(51, 65, 85, 0.5);
+  transform: translateX(5px);
+}
+
+.info-label {
+  font-weight: 600;
+  color: #cbd5e1;
+  min-width: 80px;
+  margin-right: 1rem;
+}
+
+.info-value {
+  color: #f1f5f9;
+  font-weight: 500;
+  word-break: break-word;
+}
+
+/* Family members section */
+.family-section {
+  background: rgba(30, 41, 59, 0.4);
+  padding: 2rem;
+  border-radius: 20px;
+  margin-bottom: 2rem;
+  border: 1px solid rgba(51, 65, 85, 0.3);
+  backdrop-filter: blur(15px);
+  position: relative;
+  overflow: hidden;
+}
+
+.family-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #10b981, transparent);
+}
+
+/* Family list styling */
+#familyList {
+  margin-bottom: 2rem;
+}
+
+#familyList li {
+  background: rgba(16, 185, 129, 0.1);
+  border-left-color: #10b981;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.5rem;
+}
+
+#familyList li::before {
+  background: linear-gradient(180deg, #10b981, #06b6d4);
+}
+
+.family-member-email {
+  font-weight: 500;
+  color: #f1f5f9;
+}
+
+.family-member-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.family-member-actions button {
+  width: auto;
+  padding: 0.25rem 0.75rem;
+  font-size: 0.8rem;
+  margin: 0;
+  background: linear-gradient(135deg, #ef4444, #dc2626);
+}
+
+/* Add member form */
+.add-member-form {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-end;
+}
+
+.add-member-form input {
+  flex: 1;
+  margin-bottom: 0;
+}
+
+.add-member-form button {
+  width: auto;
+  padding: 1rem 1.5rem;
+  margin-bottom: 0;
+  white-space: nowrap;
+  background: linear-gradient(135deg, #10b981, #059669);
+}
+
+.add-member-form button:hover {
+  background: linear-gradient(135deg, #059669, #10b981);
+  box-shadow: 0 5px 15px rgba(16, 185, 129, 0.3);
+}
+
+/* Empty family list state */
+.empty-family {
+  text-align: center;
+  padding: 2rem;
+  color: #94a3b8;
+  font-style: italic;
+}
+
+/* Profile messages */
+#profileMsg {
+  margin-top: 1rem;
+  padding: 1rem;
+  border-radius: 10px;
+  text-align: center;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .navbar {
+    padding: 1rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  
+  .navbar h2 {
+    font-size: 1.25rem;
+  }
+  
+  .container {
+    padding: 5rem 1rem 2rem;
+  }
+  
+  .profile-section,
+  .family-section {
+    padding: 1.5rem;
+  }
+  
+  .add-member-form {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .add-member-form button {
+    width: 100%;
+  }
+  
+  .info-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+  
+  .info-label {
+    min-width: auto;
+    margin-right: 0;
+  }
+  
+  #familyList li {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+  
+  .family-member-actions {
+    align-self: stretch;
+    justify-content: flex-end;
+  }
+}
+
+@media (max-width: 480px) {
+  .navbar {
+    padding: 0.75rem;
+  }
+  
+  .navbar h2 {
+    font-size: 1.1rem;
+  }
+  
+  .navbar button,
+  .navbar a {
+    font-size: 0.8rem;
+    padding: 0.4rem 0.8rem;
+  }
+  
+  .container {
+    padding: 4.5rem 1rem 1rem;
+  }
+  
+  .profile-section,
+  .family-section {
+    padding: 1rem;
+  }
+  
+  .profile-section h3 {
+    font-size: 1.25rem;
+  }
+}
+
+/* Scroll behavior for navbar */
+.navbar.scrolled {
+  background: rgba(15, 23, 42, 0.98);
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Animation for profile load */
+.profile-section,
+.family-section {
+  animation: slideInUp 0.6s ease-out;
+}
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.profile-section:nth-child(2) {
+  animation-delay: 0.1s;
+}
+
+.family-section {
+  animation-delay: 0.2s;
+}
